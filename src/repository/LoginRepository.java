@@ -17,7 +17,7 @@ public class LoginRepository extends DataBase {
             connect();
 
 
-            String sql = "select * from User";
+            String sql = "select * from User;";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -47,7 +47,7 @@ public class LoginRepository extends DataBase {
         try {
             connect();
 
-            String sql = "select * from User where email = " + email;
+            String sql = "select * from User where email = '" + email + "';";
             ResultSet rs = stmt.executeQuery(sql);
 
             boolean isFind = rs.next();

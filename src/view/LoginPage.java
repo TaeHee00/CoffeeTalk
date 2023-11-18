@@ -10,8 +10,10 @@ public class LoginPage extends JFrame {
     public JTextField userText;
     public JPasswordField passwordText;
     public JButton loginButton;
-    public JButton sigupButton;
+    public JButton signupButton;
     public JButton findPwButton;
+    public JLabel idLabel;
+    public JLabel passwordLabel;
     private static final LoginController loginController = new LoginController();
 
     public LoginPage() {
@@ -34,33 +36,42 @@ public class LoginPage extends JFrame {
         label.setBounds(94, 122, 227, 173);
 
         // JLabel을 JFrame에 추가
-        add(label);
+        container.add(label);
 
-        // 사용자 이름 텍스트 필드
-        userText = new JTextField("아이디 (이메일)");
-        userText.setBounds(36, 368, 319, 53);
+        idLabel = new JLabel("이메일");
+        idLabel.setBounds(36, 310, 131, 27);
+        container.add(idLabel);
+
+        userText = new JTextField();
+        userText.setBounds(36, 342, 319, 48);
         container.add(userText);
 
-        // 비밀번호 텍스트 필드
-        passwordText = new JPasswordField("비밀번호");
-        passwordText.setBounds(36, 412, 319, 53);
+        passwordLabel = new JLabel("비밀번호");
+        passwordLabel.setBounds(36, 395, 131, 27);
+        container.add(passwordLabel);
+
+        passwordText = new JPasswordField();
+        passwordText.setBounds(36, 422, 319, 48);
         container.add(passwordText);
 
         // 로그인 버튼
         loginButton = new JButton("로그인");
         loginButton.setBounds(36, 483, 319, 47);
+        loginButton.setBackground(new Color(0x886F65));
         loginButton.addActionListener(e -> loginController.login(this));
         container.add(loginButton);
 
         // 회원가입 버튼
-        sigupButton = new JButton("회원가입");
-        sigupButton.setBounds(36, 530, 319, 47);
-        container.add(sigupButton);
+        signupButton = new JButton("회원가입");
+        signupButton.setBounds(36, 530, 319, 47);
+        signupButton.addActionListener(e -> loginController.signupPage(this));
+        container.add(signupButton);
 
         // 비밀번호 찾기 버튼
         findPwButton = new JButton("비밀번호를 잊어버리셨나요?");
         findPwButton.setBounds(97, 711, 197, 39);
         container.add(findPwButton);
+
 
         setVisible(true);
     }

@@ -6,9 +6,11 @@ import entity.User;
 import service.LoginService;
 import types.LoginStatus;
 import view.LoginPage;
-import view.LoginPage1;
+import view.SignupPage;
+import view.FriendListPage;
 
 import javax.swing.*;
+import java.util.Optional;
 
 public class LoginController {
 
@@ -21,9 +23,9 @@ public class LoginController {
         String password = new String(passwordChars);
 
         LoginRequest request = LoginRequest.builder()
-                .email(email)
-                .password(password)
-                .build();
+                                        .email(email)
+                                        .password(password)
+                                        .build();
 
         LoginResponse response = loginService.login(request);
 
@@ -42,7 +44,17 @@ public class LoginController {
         System.out.println("Username: " + email);
         System.out.println("Password: " + password);
 
+        // 기존 로그인 페이지 삭제 후 메인 화면 띄우기
         frame.dispose();
-        new LoginPage1();
+        new FriendListPage();
+    }
+
+    public void signupPage(LoginPage frame) {
+        frame.dispose();
+        new SignupPage();
+    }
+
+    public static Optional<User> getLoggedInUser() {
+        return Optional.ofNullable(loggedInUser);
     }
 }

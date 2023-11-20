@@ -1,6 +1,6 @@
 package view;
 
-import controller.LoginController;
+import controller.SignupController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +24,7 @@ public class SignupPage extends JFrame {
     public JComboBox monthText;
     public JComboBox dayText;
     public JButton signupButton;
-    private static final LoginController loginController = new LoginController();
+    private static final SignupController signupController = new SignupController();
 
     public SignupPage() {
         // 프레임 설정
@@ -129,7 +129,7 @@ public class SignupPage extends JFrame {
         signupButton = new JButton("회원가입");
         signupButton.setBounds(36, 723, 319, 47);
         signupButton.setBackground(new Color(0x886F65));
-//        sigupButton.addActionListener(e -> loginController.signup(this));
+        signupButton.addActionListener(e -> signupController.signup(this));
         container.add(signupButton);
 
         setVisible(true);

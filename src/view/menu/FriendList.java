@@ -1,5 +1,8 @@
 package view.menu;
 
+import controller.LoginController;
+import entity.User;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -15,7 +18,18 @@ public class FriendList extends JPanel {
 
     static int FRIEND_SIZE = 30;
 
+    static User session;
+
     public FriendList() {
+        // 로그인 하지 않고 넘어왔을 경우 강제 종료
+         if (LoginController.getLoggedInUser().isEmpty()) {
+             JOptionPane.showInternalMessageDialog(this, "로그인이 필요합니다.");
+             System.exit(-1);
+         } else {
+             session = LoginController.getLoggedInUser().get();
+         }
+
+
         setLayout(null);
         label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 24));
         label.setBounds(23, 17, 51, 27);
@@ -46,7 +60,7 @@ public class FriendList extends JPanel {
         myProfile.setFocusPainted(false);
         myProfile.setBorderPainted(false);
         myProfile.setContentAreaFilled(false);
-        myProfile.setText("임시 본인 프로필");
+        myProfile.setText(session.nickname());
         myProfile.setFont(new Font(label.getFont().getName(), Font.PLAIN, 20));
         myProfile.setIconTextGap(15);
         myProfile.setMargin(new Insets(0, 8, 0, 0));

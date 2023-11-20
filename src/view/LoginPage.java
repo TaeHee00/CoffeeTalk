@@ -1,6 +1,7 @@
 package view;
 
 import controller.LoginController;
+import controller.SignupController;
 
 import javax.swing.*;
 import java.awt.*;

@@ -44,9 +44,6 @@ public class LoginController {
         if (response.loginStatus() != LoginStatus.LOGIN_SUCCESS) return;
 
         loggedInUser = response.user();
-        // 콘솔에 출력
-        System.out.println("Username: " + email);
-        System.out.println("Password: " + password);
 
         // 기존 로그인 페이지 삭제 후 메인 화면 띄우기
         frame.dispose();

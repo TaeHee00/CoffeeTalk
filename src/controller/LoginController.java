@@ -3,11 +3,12 @@ package controller;
 import dto.LoginRequest;
 import dto.LoginResponse;
 import entity.User;
+import lombok.Setter;
 import service.LoginService;
 import types.LoginStatus;
 import view.LoginPage;
+import view.MenuPage;
 import view.SignupPage;
-import view.FriendListPage;
 
 import javax.swing.*;
 import java.util.Optional;
@@ -15,9 +16,12 @@ import java.util.Optional;
 public class LoginController {
 
     private static final LoginService loginService = new LoginService();
+    @Setter
     private static User loggedInUser = null;
 
     public void login(LoginPage frame) {
+        if (!validate(frame)) return;
+
         String email = frame.userText.getText();
         char[] passwordChars = frame.passwordText.getPassword();
         String password = new String(passwordChars);
@@ -46,7 +50,7 @@ public class LoginController {
 
         // 기존 로그인 페이지 삭제 후 메인 화면 띄우기
         frame.dispose();
-        new FriendListPage();
+        new MenuPage();
     }
 
     public void signupPage(LoginPage frame) {
@@ -56,5 +60,22 @@ public class LoginController {
 
     public static Optional<User> getLoggedInUser() {
         return Optional.ofNullable(loggedInUser);
+    }
+
+    private boolean validate(LoginPage frame) {
+        String email = frame.userText.getText();
+        char[] passwordChars = frame.passwordText.getPassword();
+        String password = new String(passwordChars);
+
+        if (email.trim().isBlank()) {
+            JOptionPane.showMessageDialog(null, "이메일을 입력해주세요.");
+            return false;
+        }
+        if (password.trim().isBlank()) {
+            JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요.");
+            return false;
+        }
+
+        return true;
     }
 }
